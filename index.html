@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+</head>
+    <title>
+            week-1 work 蔡升豪   
+    </title>
+    <style type="text/css">
+        .head{display:flex;}
+        .webname
+        {flex:7;
+        
+        font-size:20px;
+        justify-self: start;
+        }
+        .headitem{
+        display:flex;
+        flex:3;
+        
+        justify-content: end;
+        font-size:20px;
+          }
+        .item {
+        display:flex;
+        width:25%;
+        flex:none;
+        padding:5px;
+        text-align:center;}
+        .content{
+            display:flex;
+            flex:auto;
+            justify-content: center;
+            align-items:center;
+            height:300px;
+            background-color: #FFD954;
+        }
+        .text{
+            flex:auto;
+            font-weight:bold;
+            justify-content: center;
+            align-items:center;
+            text-align: center;
+            font-size:40px;
+        }
+      
+        .box{
+            display:flex;
+            flex-wrap:wrap;
+       
+            width:1200px;margin-left:auto;margin-right:auto;
+        }
+        .img{    
+           width:25%;
+            height:50%;
+        
+           box-sizing:border-box;
+        }
+    
+        img{
+            width:100% ;
+            height:150% ;
+        }
+        .meau{
+            display: none;
+
+        }
+        .box-text{
+            justify-content: center;
+            align-items:center;
+            text-align: center;
+            position: relative;
+            top: -20px;
+            font-size:20px;
+            background-color:#F2AB39;
+        }
+        .menu-list{
+            display:none;
+        }
+        #menu-list{
+            display:none;
+            position:absolute;
+            background: #F2AB39;
+        }
+        @media screen and (max-width:1200px){
+            .head{width:100%;}
+            .content{width:100%;}
+            .box{width:90%;}
+            .img{width:50%;}
+        }
+        @media screen and (max-width:600px){
+            .head{width:100%;}
+            .content{width:100%;}
+            .box{width:90%;}
+            .img{width:100%;}
+            .item{
+                display:none;
+               
+            }
+            .meau{
+                display:table;
+                width:25%;
+                height: 25%;
+
+            }
+        }
+    </style>
+     <script type="text/javascript">
+        function toggleMenu(){
+            var m=document.getElementById("menu-list")
+            if(m.style.display=="none")
+            {
+                     m.style.display="block";
+              }
+            else{
+                m.style.display="none";
+          }        
+        }                        
+      </script>
+<body>
+<div class="head">
+    <div class="webname">My Website</div>
+    <div class="headitem">
+        <div onclick="toggleMenu() ;" class="meau">
+            <img src="https://cdn1.iconfinder.com/data/icons/feather-2/24/menu-256.png">
+            <div id="menu-list"> 
+                Item1
+                Item2
+                ttem3
+                Item4 
+            </div>
+        </div>
+        <div class="item">Item1</div>
+        <div class="item">Item2</div>
+        <div class="item">Item3</div>
+        <div class="item">Item4</div>
+    </div>       
+</div>
+<div class="content">
+    <div class="text">Welcome to Myhome</div>
+</div>
+<div class="box">
+    <div class="img">
+        <img src="https://mdbootstrap.com/img/Photos/Lightbox/Thumbnail/img%20(97).jpg">
+        <div class=box-text>文字說明</div>
+    </div>
+    <div class="img">
+        <img src="https://mdbootstrap.com/img/Photos/Lightbox/Thumbnail/img%20(97).jpg">
+        <div class=box-text>文字說明</div>
+    </div>
+    <div class="img">
+        <img src="https://mdbootstrap.com/img/Photos/Lightbox/Thumbnail/img%20(97).jpg">
+        <div class=box-text>文字說明</div>
+    </div>
+    <div class="img">
+        <img src="https://mdbootstrap.com/img/Photos/Lightbox/Thumbnail/img%20(97).jpg">
+        <div class=box-text>文字說明</div>
+    </div>
+    <div class="img">
+        <img src="https://mdbootstrap.com/img/Photos/Lightbox/Thumbnail/img%20(97).jpg">
+        <div class=box-text>文字說明</div>
+    </div>
+    <div class="img">
+        <img src="https://mdbootstrap.com/img/Photos/Lightbox/Thumbnail/img%20(97).jpg">
+        <div class=box-text>文字說明</div>
+    </div>
+    <div class="img">
+        <img src="https://mdbootstrap.com/img/Photos/Lightbox/Thumbnail/img%20(97).jpg">
+        <div class=box-text>文字說明</div>
+    </div>
+    <div class="img">
+        <img src="https://mdbootstrap.com/img/Photos/Lightbox/Thumbnail/img%20(97).jpg">
+        <div class=box-text>文字說明</div>
+    </div>
+
+
+
+</div>
+
+
+
+
+
+</body>
+
+
+</html>
