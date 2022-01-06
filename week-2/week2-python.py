@@ -30,24 +30,24 @@ avg({
     }
     ]
 })
-def maxProduct(nums):
-    x=len(nums)
-    t=-float('inf')
-    t2=-float('inf')
-    for i in (nums):
-        if i > t:
-            t=i
+# def maxProduct(nums): 取得最大值&第二大值
+#     x=len(nums)
+#     t=-float('inf')
+#     t2=-float('inf')
+#     for i in (nums):
+#         if i > t:
+#             t=i
         
-    for i in (nums):
-        if t>i>t2:
-            t2=i
+#     for i in (nums):
+#         if t>i>t2:
+#             t2=i
        
           
-    anser=t*t2
-    print(anser)
-    return(t*t2)
+#     anser=t*t2
+#     print(anser)
+#     return(t*t2)
   
-#   def maxProduct(nums): 解法2
+#   def maxProduct(nums): 解法2-取得最大值&第二大值
     #     t=-float('inf')
     # t2=-float('inf')
     # for i in (nums) :
@@ -60,11 +60,36 @@ def maxProduct(nums):
     #            t2=i;
     # t3=t*t2
     # print(t3) 
+def maxProduct(nums):        #取得相乘最大值
+    t2=-float('inf')          #t2為無窮小
+    t=0                       #設一個t的變數
+    i=0                      
+    x=0
+    long=len(nums)     
+    while i<long:              # i取出nums中的數字
+        y=nums[i] 
+        i2=0                  #重製i2迴圈
+        while i2<long:
+            x=nums[i2]
+         
+            if i != i2 :        #避免取出相同元素之數字 
+                        t=x*y;                                              
+                        if  t>t2:
+                                    t2=t;
+            i2=i2+1 
+
+        i=i+1
+    print(t2)
+  
+       
+
+
 
 maxProduct([5,20,2,6])
-maxProduct([10,-10,0,3])
-maxProduct([-1, 2])
-maxProduct([-1,0, 2])
+maxProduct([10, -20, 0, 3]) # 得到 30
+maxProduct([-1, 2]) # 得到 -2
+maxProduct([-1, 0, 2]) # 得到 0
+maxProduct([-1, -2, 0]) # 得到 2
 
 def twoSum(nums, target):
     x=len(nums)

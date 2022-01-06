@@ -56,29 +56,58 @@
             ]
         }
         );
-       function maxProduct(nums){
-           let a= nums
-           let max=-Infinity
-           let max2=-Infinity
-           for (var i=0;i<a.length;i++){
-               if (a[i]>max){
-                   max2=max
-                   max=a[i]
-               }
-               else
-                    {   if (a[i]>max2){
-                        max2=a[i]
-                    }
-            }
+     //    function maxProduct(nums){               原本想法目標是要取最大值與第二大值，發現相乘最大，不一定是最大和第二大的數
+
+    //        let a= nums
+    //        let max=-Infinity
+    //        let max2=-Infinity
+    //        for (var i=0;i<a.length;i++){
+    //            if (a[i]>max){
+    //                max2=max
+    //                max=a[i]
+    //            }
+    //            else
+    //                 {   if (a[i]>max2){
+    //                     max2=a[i]
+    //                 }
+    //         }
+           
+                
+    //         }
         
-           }
-           answer=max*max2
-           console.log(answer);
+    //        }
+    //        answer=max*max2
+    //        console.log(answer);
+    //    }
+    function maxProduct(nums){
+            let a=nums
+            let z=-Infinity
+            for(var i=0;i<a.length;i++){
+                x=a[i];
+                
+                for(var i2=0;i2<a.length;i2++){
+                    y=a[i2];
+                    if (i!=i2){
+                        t=x*y
+                        if(t>z){
+                            z=t
+                        }
+
+
+                    }
+                    
+                    
+
+                }
+            }
+            console.log(z)
+       
        }
        maxProduct([5,20,2,6])
        maxProduct([10,-20,0,3])
        maxProduct([-1,2])
        maxProduct([-1,0,2])
+       maxProduct([-1,-2,0])
        function twoSum(nums,target){
         let a= nums
         for(var i=0;i<a.length;i++){
