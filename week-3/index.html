@@ -1,0 +1,516 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+</head>
+    <title>
+            week-3 work 蔡升豪   
+    </title>
+    <style type="text/css">
+        .head{display:flex;}
+        .webname
+        {flex:7;
+        
+        font-size:20px;
+        justify-self: start;
+        }
+        .headitem{
+        display:flex;
+        flex:3;
+        
+        justify-content: end;
+        font-size:20px;
+          }
+        .item {
+        display:flex;
+        width:25%;
+        flex:none;
+        padding:5px;
+        text-align:center;}
+        .content{
+            display:flex;
+            flex:auto;
+            justify-content: center;
+            align-items:center;
+            height:300px;
+            background-color: #FFD954;
+        }
+        .text{
+            flex:auto;
+            font-weight:bold;
+            justify-content: center;
+            align-items:center;
+            text-align: center;
+            font-size:40px;
+        }
+      
+        .box{
+            display:flex;
+            flex-wrap:wrap;
+            
+            width:1200px;margin-left:auto;margin-right:auto;
+        }
+        .img{    
+           width:23%;
+            height:100%; 
+            aspect-ratio:16/9 ;
+            margin:1% 0  2% auto;
+          
+           border: tomato 2px solid;
+        }
+        img{
+            display: block;
+            width: 100%;
+            height: auto;
+            aspect-ratio:16/9 ;
+        }
+        .meau{
+            display: none;
+            justify-content: end;
+        }
+        .box-text{
+            justify-content: center;
+            align-items:center;
+            text-align: center;
+            position: relative;
+            top: 0px;
+            font-size:1rem;
+            background-color:#F2AB39;
+        }
+        .menu-list{
+            display:none;
+        }
+        #menu-list{
+            display:none;
+            position:absolute;
+            background: #F2AB39;
+        }
+        .more{
+            display: flex;
+            justify-content: center;
+            align-items:center;
+        }
+        .morepick{
+            font-size:1.5rem;
+        }
+      
+        @media screen and (max-width:1200px){
+            .head{width:100%;}
+            .content{width:100%;}
+            .box{width:90%;}
+            .img{width:48%;}
+        }
+        @media screen and (max-width:600px){
+            .head{width:100%;}
+            .content{width:100%;}
+            .box{width:90%;}
+            .img{width:100%;}
+            .item{
+                display:none;
+               
+            }
+            .meau{
+                display:table;
+                width:25%;
+                height: 25%;
+
+            }
+        }
+    </style>
+     <script type="text/javascript">
+        window.onload=function(){    
+            function getData(){
+                const request=new XMLHttpRequest();
+                request.open("GET","https://padax.github.io/taipei-day-trip-resources/taipei-attractions-assignment.json")
+                request.onload = () => {
+                    const data= JSON.parse(request.response)
+                    let a = data.result
+                    let b = a.results
+                    const stitle = b.map(c =>c.stitle ); //取出景點列表
+                    console.log(stitle)
+                    const file = b.map(d =>d.file);  //取出圖片列表資料
+                    // console.log(file)
+                    const jpg  = file.map(e => {     // 取出第一張圖片列表
+                        let g=e.toLowerCase();
+                        let f =g.split("jpg",2)
+                        return f[0]+"jpg"
+                    // function addElement(){
+                    //     let parent = document.createElement("div");
+                    //     parent.setAttribute("class","box");
+                    //     document.body.appendChild(parent);
+                    //     for (let pic of stitle){
+                    //         let newDiv = document.createElement("div");
+                    //         let newimg = document.createElement("img");
+                    //         newimg.setAttribute("src",pic);
+                    //         newDiv.appendChild(newimg);
+                    //         parent.appendChild(newDiv);
+                    //     }  
+                    // }
+                    });
+
+                    // console.log(jpg)
+                    function addElement(){
+                        let parent = document.createElement("div");
+                        parent.setAttribute("class","box");
+                        parent.setAttribute("id","boxid");
+                        document.body.appendChild(parent);
+                        for (let i=0;i<8;i++){
+                            let newDiv = document.createElement("div");
+                            newDiv.setAttribute("class","img");
+                            newDiv.setAttribute("id","i"+i);
+                            let newimg = document.createElement("img");
+                            newimg.setAttribute("src",jpg[i]);
+                            newDiv.appendChild(newimg);
+                            let text   = document.createElement("div");
+                            text.textContent=stitle[i];
+                            text.setAttribute("class","box-text");
+                            newDiv.appendChild(text);
+                            parent.appendChild(newDiv);
+                            
+                        } 
+                        
+                        let more = document.createElement("div");
+                        more.setAttribute("class","more");
+                        more.setAttribute("id","more01")
+                        let morepick = document.createElement("button");
+                        morepick.setAttribute("class","morepick")
+                        morepick.textContent="lord more";
+                        morepick.setAttribute("onclick","more()")
+                        more.appendChild(morepick);
+                        document.body.appendChild(more);
+            
+                    }           
+                   
+                    addElement();
+                         
+                };
+                 
+            request.send();               
+                
+            } 
+            //jpg,stitle
+            getData();
+         
+        }
+        function more(){
+                const request=new XMLHttpRequest();
+                request.open("GET","https://padax.github.io/taipei-day-trip-resources/taipei-attractions-assignment.json")
+                request.onload = () => {
+                    const data= JSON.parse(request.response)
+                    let a = data.result
+                    let b = a.results
+                    const stitle = b.map(c =>c.stitle ); //取出景點列表
+                    console.log(stitle)
+                    const file = b.map(d =>d.file);  //取出圖片列表資料
+                    // console.log(file)
+                    const jpg  = file.map(e => {     // 取出第一張圖片列表
+                        let g=e.toLowerCase();
+                        let f =g.split("jpg",2)
+                        return f[0]+"jpg"
+                    // function addElement(){
+                    //     let parent = document.createElement("div");
+                    //     parent.setAttribute("class","box");
+                    //     document.body.appendChild(parent);
+                    //     for (let pic of stitle){
+                    //         let newDiv = document.createElement("div");
+                    //         let newimg = document.createElement("img");
+                    //         newimg.setAttribute("src",pic);
+                    //         newDiv.appendChild(newimg);
+                    //         parent.appendChild(newDiv);
+                    //     }  
+                    // }
+                    });
+                
+                    function addElemnr2(){
+                        let myDiv=document.getElementById("boxid");
+                        let div_s=myDiv.getElementsByTagName("div");
+                        if (div_s.length==16){
+                            // let parent = document.createElement("div");
+                            // parent.setAttribute("class","box");
+                            // parent.setAttribute("id","boxid");
+                            // document.body.appendChild(parent);
+                                
+                            for (let i=8;i<16;i++){
+                                let parent = document.getElementById("boxid");
+                                let newDiv = document.createElement("div");
+                                newDiv.setAttribute("class","img");
+                                newDiv.setAttribute("id","i"+i);
+                                let newimg = document.createElement("img");
+                                newimg.setAttribute("src",jpg[i]);
+                                newDiv.appendChild(newimg);
+                                let text   = document.createElement("div");
+                                text.textContent=stitle[i];
+                                text.setAttribute("class","box-text");
+                                newDiv.appendChild(text);
+                                parent.appendChild(newDiv);
+                                        
+                            }
+                            let abc=document.getElementById("more01");
+                            abc.style.display="none";
+                            let more = document.createElement("div");
+                            more.setAttribute("class","more");
+                            more.setAttribute("id","more02")
+                            let morepick = document.createElement("button");
+                            morepick.setAttribute("class","morepick")
+                            morepick.textContent="lord more";
+                            morepick.setAttribute("onclick","more()")
+                            more.appendChild(morepick);
+                            document.body.appendChild(more);
+                        }
+                        else if (div_s.length==32){
+                            for (let i=16;i<24;i++){
+                                let parent = document.getElementById("boxid");
+                                let newDiv = document.createElement("div");
+                                newDiv.setAttribute("class","img");
+                                newDiv.setAttribute("id","i"+i);
+                                let newimg = document.createElement("img");
+                                newimg.setAttribute("src",jpg[i]);
+                                newDiv.appendChild(newimg);
+                                let text   = document.createElement("div");
+                                text.textContent=stitle[i];
+                                text.setAttribute("class","box-text");
+                                newDiv.appendChild(text);
+                                parent.appendChild(newDiv);
+                                        
+                            }
+                            let abc=document.getElementById("more02");
+                            abc.style.display="none";
+                            let more = document.createElement("div");
+                            more.setAttribute("class","more");
+                            more.setAttribute("id","more03")
+                            let morepick = document.createElement("button");
+                            morepick.setAttribute("class","morepick")
+                            morepick.textContent="lord more";
+                            morepick.setAttribute("onclick","more()")
+                            more.appendChild(morepick);
+                            document.body.appendChild(more);
+                        }
+                        else if (div_s.length==48){
+                            for (let i=24;i<32;i++){
+                                let parent = document.getElementById("boxid");
+                                let newDiv = document.createElement("div");
+                                newDiv.setAttribute("class","img");
+                                newDiv.setAttribute("id","i"+i);
+                                let newimg = document.createElement("img");
+                                newimg.setAttribute("src",jpg[i]);
+                                newDiv.appendChild(newimg);
+                                let text   = document.createElement("div");
+                                text.textContent=stitle[i];
+                                text.setAttribute("class","box-text");
+                                newDiv.appendChild(text);
+                                parent.appendChild(newDiv);
+                                        
+                            }
+                            let abc=document.getElementById("more03");
+                            abc.style.display="none";
+                            let more = document.createElement("div");
+                            more.setAttribute("class","more");
+                            more.setAttribute("id","more04")
+                            let morepick = document.createElement("button");
+                            morepick.setAttribute("class","morepick")
+                            morepick.textContent="lord more";
+                            morepick.setAttribute("onclick","more()")
+                            more.appendChild(morepick);
+                            document.body.appendChild(more);
+                        }
+                        else if (div_s.length==64){
+                            for (let i=32;i<40;i++){
+                                let parent = document.getElementById("boxid");
+                                let newDiv = document.createElement("div");
+                                newDiv.setAttribute("class","img");
+                                newDiv.setAttribute("id","i"+i);
+                                let newimg = document.createElement("img");
+                                newimg.setAttribute("src",jpg[i]);
+                                newDiv.appendChild(newimg);
+                                let text   = document.createElement("div");
+                                text.textContent=stitle[i];
+                                text.setAttribute("class","box-text");
+                                newDiv.appendChild(text);
+                                parent.appendChild(newDiv);
+                                        
+                            }
+                            let abc=document.getElementById("more04");
+                            abc.style.display="none";
+                            let more = document.createElement("div");
+                            more.setAttribute("class","more");
+                            more.setAttribute("id","more05")
+                            let morepick = document.createElement("button");
+                            morepick.setAttribute("class","morepick")
+                            morepick.textContent="lord more";
+                            morepick.setAttribute("onclick","more()")
+                            more.appendChild(morepick);
+                            document.body.appendChild(more);
+                        }
+                        else if (div_s.length==80){
+                            for (let i=40;i<48;i++){
+                                let parent = document.getElementById("boxid");
+                                let newDiv = document.createElement("div");
+                                newDiv.setAttribute("class","img");
+                                newDiv.setAttribute("id","i"+i);
+                                let newimg = document.createElement("img");
+                                newimg.setAttribute("src",jpg[i]);
+                                newDiv.appendChild(newimg);
+                                let text   = document.createElement("div");
+                                text.textContent=stitle[i];
+                                text.setAttribute("class","box-text");
+                                newDiv.appendChild(text);
+                                parent.appendChild(newDiv);
+                                        
+                            }
+                            let abc=document.getElementById("more05");
+                            abc.style.display="none";
+                            let more = document.createElement("div");
+                            more.setAttribute("class","more");
+                            more.setAttribute("id","more06")
+                            let morepick = document.createElement("button");
+                            morepick.setAttribute("class","morepick")
+                            morepick.textContent="lord more";
+                            morepick.setAttribute("onclick","more()")
+                            more.appendChild(morepick);
+                            document.body.appendChild(more);  
+                        }
+                        else if (div_s.length==96){
+                            for (let i=48;i<56;i++){
+                                let parent = document.getElementById("boxid");
+                                let newDiv = document.createElement("div");
+                                newDiv.setAttribute("class","img");
+                                newDiv.setAttribute("id","i"+i);
+                                let newimg = document.createElement("img");
+                                newimg.setAttribute("src",jpg[i]);
+                                newDiv.appendChild(newimg);
+                                let text   = document.createElement("div");
+                                text.textContent=stitle[i];
+                                text.setAttribute("class","box-text");
+                                newDiv.appendChild(text);
+                                parent.appendChild(newDiv);
+                                        
+                            }
+                            let abc=document.getElementById("more06");
+                            abc.style.display="none";
+                            let more = document.createElement("div");
+                            more.setAttribute("class","more");
+                            more.setAttribute("id","more07")
+                            let morepick = document.createElement("button");
+                            morepick.setAttribute("class","morepick")
+                            morepick.textContent="已無資料";
+                            morepick.setAttribute("onclick","more()")
+                            more.appendChild(morepick);
+                            document.body.appendChild(more);  
+                        }
+                        
+
+ 
+                    }
+                    addElemnr2();
+                }       
+            request.send();     
+        }    
+        // function more(){
+
+            
+        //     let myDiv=document.getElementById("boxid");
+        //     let div_s=myDiv.getElementsByTagName("div")
+        //     alert(div_s.length);
+        //     if (div_s.length=16){
+                            
+        //         for (let i=8;i<15;i++){
+        //         let newDiv = document.createElement("div");
+        //         newDiv.setAttribute("class","img");
+        //         newDiv.setAttribute("id","i"+i);
+        //         let newimg = document.createElement("img");
+        //         newimg.setAttribute("src",jpg[i]);
+        //         newDiv.appendChild(newimg);
+        //         let text   = document.createElement("div");
+        //         text.textContent=stitle[i];
+        //         text.setAttribute("class","box-text");
+        //         newDiv.appendChild(text);
+        //         parent.appendChild(newDiv);
+                            
+        //         }
+        //     }    
+
+
+
+
+        // }
+
+        function toggleMenu(){
+            var m=document.getElementById("menu-list")
+            if(m.style.display=="none"){
+                     m.style.display="block";
+              }
+            else{
+                m.style.display="none";
+          }        
+        }                        
+      </script>
+<body>
+<div class="head">
+    <div class="webname">My Website</div>
+    <div class="headitem">
+        <div onclick="toggleMenu() ;" class="meau">
+            <img src="https://cdn1.iconfinder.com/data/icons/feather-2/24/menu-256.png">
+            <div id="menu-list"> 
+                Item1
+                Item2
+                ttem3
+                Item4 
+            </div>
+        </div>
+        <div class="item">Item1</div>
+        <div class="item">Item2</div>
+        <div class="item">Item3</div>
+        <div class="item">Item4</div>
+    </div>       
+</div>
+<div class="content">
+    <div class="text">Welcome to Myhome</div>
+</div>
+
+<!-- <div class="box">
+    <div class="img">
+        <img src="https://mdbootstrap.com/img/Photos/Lightbox/Thumbnail/img%20(97).jpg">
+        <div class=box-text>文字說明</div>
+    </div>
+    <div class="img">
+        <img src="https://mdbootstrap.com/img/Photos/Lightbox/Thumbnail/img%20(97).jpg">
+        <div class=box-text>文字說明</div>
+    </div>
+    <div class="img">
+        <img src="https://mdbootstrap.com/img/Photos/Lightbox/Thumbnail/img%20(97).jpg">
+        <div class=box-text>文字說明</div>
+    </div>
+    <div class="img">
+        <img src="https://mdbootstrap.com/img/Photos/Lightbox/Thumbnail/img%20(97).jpg">
+        <div class=box-text>文字說明</div>
+    </div>
+    <div class="img">
+        <img src="https://mdbootstrap.com/img/Photos/Lightbox/Thumbnail/img%20(97).jpg">
+        <div class=box-text>文字說明</div>
+    </div>
+    <div class="img">
+        <img src="https://mdbootstrap.com/img/Photos/Lightbox/Thumbnail/img%20(97).jpg">
+        <div class=box-text>文字說明</div>
+    </div>
+    <div class="img">
+        <img src="https://mdbootstrap.com/img/Photos/Lightbox/Thumbnail/img%20(97).jpg">
+        <div class=box-text>文字說明</div>
+    </div>
+    <div class="img">
+        <img src="https://mdbootstrap.com/img/Photos/Lightbox/Thumbnail/img%20(97).jpg">
+        <div class=box-text>文字說明</div>
+    </div>
+
+
+
+</div> -->
+
+
+
+
+
+</body>
+
+
+</html>
