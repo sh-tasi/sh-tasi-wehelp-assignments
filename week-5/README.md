@@ -37,22 +37,15 @@
 >
 >3-4 使用 SELECT 指令取得 member 資料表中第 2 ~ 4 共三筆資料，並按照 time 欄位，由近到遠排序。( 並非編號 2、3、4 的資料，而是排序後的第 2 ~ 4 筆資料 )
 >---
->語法: WITH 資料表 AS(SELECT ROW_NUMBER()OVER(ORDER BY 排序順序 )AS 流水號,放入項目)SELECT 項目 FROM 資料表 WHERE 流水號 BETWEEN 變項數值 AND 變相數值 ;
+>語法:SELECT 項目 FROM 表單 ORDER BY 排列項目 DESC(逆向) limit (忽略N筆數量),(收尋N筆資料量) 
 >```MYSQL
->1. WITH `member`AS(
->2. SELECT ROW_NUMBER()OVER(ORDER BY `time`DESC)AS `row_num`,
->3. `id`,
->4. `username`,
->5. `password`,
->6. `follower_count`,
->7. `time`
->8. FROM `member`)
->9. SELECT * FROM `member`
->10. WHERE  `row_num` BETWEEN 2 AND 4;
+>1. SELECT * FROM `member`
+>2. ORDER BY `time` DESC
+>3. limit 1,3;
 >```
 > PICTURE
 >
->![Alt text](https://github.com/sh-tasi/sh-tasi-wehelp-assignments/blob/master/week-5/picture/%E8%A6%81%E6%B1%82%E4%B8%89-3.PNG)
+>![Alt text](https://github.com/sh-tasi/sh-tasi-wehelp-assignments/blob/master/week-5/picture/%E8%A6%81%E6%B1%823-4(2).PNG)
 >
 >3-5 使用 SELECT 指令取得欄位 username 是 test 的會員資料。
 >---
