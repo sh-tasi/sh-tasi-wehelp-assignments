@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>week06 升豪</title>
+        <style type="text/css">
+            a{text-decoration:none}
+            a:hover{text-decoration:none}
+            a:link{color:black;}
+            a:visited{color:black;}
+            a:active{color:black;}
+            body{ margin: 0; padding: 0; }
+            .home{
+                display: flex; flex:wrap;
+                background-color: rgba(25, 207, 153, 0.8);align-content: center;justify-content: center;   
+            }
+            .hometext{
+                padding: 2rem;font-weight:bold;font-size:30px;text-align:center;
+            }
+            .signsystembox{
+                display: flex; flex:wrap; align-content: center;justify-content: center;margin:1rem;
+            }
+            .content{
+                display:flex; flex:wrap;margin:5px;align-content: center;justify-content: center;
+            }
+            .sign-text{
+                margin:5px;letter-spacing:1px;font-size: 1rem;
+            }
+            .content-b{    
+                display:flex; flex:wrap;margin:1rem;align-content: center;justify-content: center;font-weight:bold;font-size: 1.4rem;
+            }
+        </style>
+       
+    </head>
+    <body>
+        <header class="home">
+            <a href="/"><div class="hometext"> 歡迎光臨，請註冊登入系統</div> </a>                          
+        </header>
+        <div class="content-b">註冊帳號</div>
+        <div class="signsystembox">
+            <form action="/signup" method="POST"class="signin">
+                <div class="content"><div class="sign-text">姓名</div><input type="text" name="name"></div>
+                <div class="content"><div class="sign-text">帳號</div><input type="text" name="username"></div>
+                <div class="content"><div class="sign-text">密碼</div><input type="text" name="password"></div>
+                <div class="content"><button class="sign-text">註冊</button></div>
+            </form>
+        </div>
+        <hr size="2px">
+        <div class="content-b">登入系統</div>
+        <div class="signsystembox">
+            <form action="/signin" method="POST"class="signin">       
+                <div class="content"><div class="sign-text">帳號</div><input type="text" name="username"></div>
+                <div class="content"><div class="sign-text">密碼</div><input type="text" name="password"></div>
+                <div class="content"><button class="sign-text">登入</button></div>
+            </form>
+        </div>
+    </body>
+
+
+
+
+</html>
