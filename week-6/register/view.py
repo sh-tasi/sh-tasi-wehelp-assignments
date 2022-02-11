@@ -14,29 +14,23 @@ def signup():
     password='qweasdzxc',
     database='website'
     )
-    username_blank=0
     name=request.form["name"]
     username=request.form["username"]
     password=request.form["password"]
     mycursor = mydb.cursor()
-    mycursor.execute("SELECT username FROM member")
-    if len(username)==0 or username.isspace==True:
-        username_blank=1
-    username_search=(username,)
-    myresult = mycursor.fetchall()
-    if username_search in myresult:
-        error01="帳號已經被註冊" 
-        mycursor.close()    
-        mydb.close()   
-        return redirect(url_for('register.message',error=error01))
-                # error01="帳號已註冊，請重新輸入"     
+    sql="SELECT `username` FROM `member` WHERE `username` = %s"
+    username_sql=(username,)
+    mycursor.execute(sql,username_sql)
+    myresult = mycursor.fetchone()
+    print(myresult)
+        # error01="帳號已註冊，請重新輸入"     
         # return redirect(url_for('error01',error=error01))
-    elif len(name)==0 or len(password)==0 or username_blank==1 or name.isspace()==True or password.isspace()==True :
+    if len(name)==0 or len(password)==0 or len(username)==0 or len(username)==0 or name.isspace()==True or password.isspace()==True :
         error02="請輸入姓名&帳號&密碼"  
         mycursor.close()  
         mydb.close()      
         return redirect(url_for('register.message',error=error02))
-    else:
+    elif myresult==None:
         new="INSERT INTO member (name,username,password) VALUES(%s,%s,%s)"
         val=(name,username,password)
         mycursor.execute(new, val)
@@ -44,6 +38,11 @@ def signup():
         mycursor.close()  
         mydb.close()   
         return render_template ("index.html")
+    else:
+        error01="帳號已經被註冊" 
+        mycursor.close()    
+        mydb.close()   
+        return redirect(url_for('register.message',error=error01))
 @register.route("/message/")
 def message():
     
