@@ -23,20 +23,18 @@ def signin():
         mycursor.close()  
         mydb.close()     
         return redirect(url_for('login_system.message',error=login_error01))
-    sql="SELECT `name`,`username`,`password` FROM `member` WHERE `username` = %s"
+    sql="SELECT `name`,`password` FROM `member` WHERE `username` = %s"
     username_sql=(username,)
     mycursor.execute(sql,username_sql)
-    myresult=mycursor.fetchall()
+    myresult=mycursor.fetchone()
     if myresult==[]:
         login_error02="帳號錯誤或不存在，請重新輸入或註冊帳號"  
         mycursor.close()  
         mydb.close()      
         return redirect(url_for('login_system.message',error=login_error02))
     else:
-        member_data=myresult[0]
-        member_user=member_data[0]
-        member_username=member_data[1]
-        member_password=member_data[2] 
+        member_user=myresult[0]
+        member_password=myresult[1]
         if password==member_password:     
             session["username"]=member_user
             print(session["username"])
