@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>week07 升豪</title>
+        <style type="text/css">
+            .text{
+            background-color: rgba(25, 207, 153, 0.829); padding: 2rem;font-weight:bold;font-size:30px;text-align:center;
+
+            }
+            .signsystem{
+                display: flex; flex:wrap; align-content: center;justify-content: center;margin:1rem; font-size: 1.5rem;
+            }
+            .signin{
+                display: flex; flex:wrap;flex-direction: column; 
+            }
+            .content{
+                display:flex; flex:wrap;margin:5px;align-content: center;justify-content: center;
+            }
+            .sign-text{
+                margin:3px;
+            }
+            .member_search_system{
+                display:flex; align-content: center;justify-content: center; font-size: 1rem;
+            }
+            .member_search_item{ 
+                display: flex; flex:wrap; align-content: center;justify-content: center;margin:1rem; font-size: 1.5rem;font-weight:bold;
+            }
+            .member_search_buttom{ 
+                display: flex; flex:wrap; align-content: center;justify-content: center;margin:2rem; font-size: 1.5rem;font-weight:bold;
+            }
+        </style>
+        <script type="text/javascript">
+            function searchData(url,data){
+                return fetch(url,{
+                    method:'GET',
+                })
+                .then(response=>response.text())
+                .catch(error=>console.error(error))
+            }
+            function updata_api(url,data){
+                return fetch(url,{
+                    body:JSON.stringify(data),
+                    method:"POST",
+                    headers:{
+                        "Content-Type":"application/json",
+                        "Accept":"application/json",
+                    }
+                })
+                .then(response=>response.text())
+                .catch(error=>console.error(error))
+            }
+            const url_search_api=`http://127.0.0.1:3000/api/members`
+            const url_updata_api=`http://127.0.0.1:3000/api/member`
+            function submit(){
+                const username=document.getElementById('my_data').value;
+                console.log(username)
+                searchData(url_search_api+"?username="+username)
+                .then(data=>{
+                    console.log(data)
+                    let rs_data=JSON.parse(data)
+                    console.log(rs_data)
+                    const result=rs_data.data
+                    if (result==null){
+                        console.log(null)
+                        let response_name=document.getElementById("name")
+                        response_name.innerHTML="查無此帳號"
+                    }
+                    else{
+                        const result_name=result.name
+                        const result_username=result.username
+                        // let response_name = document.createElement("div");
+                        // response_name.setAttribute("class","signsystem");
+                        // response_name.textContent=result_name;
+                        // document.body.appendChild(response_name);
+                        let response_name=document.getElementById("name")
+                        response_name.innerHTML=result_name+"("+result_username+")"
+                        console.log(result_name);
+                    }
+                })
+                .catch(error=>console.error(error));
+            }
+            function submit_updata(){
+                const new_username=document.getElementById('updata_my_data').value;
+                const new_username_js={"name":new_username}
+                console.log(new_username_js);
+                updata_api(url_updata_api,new_username_js)
+                .then(data=>{
+                    console.log(data)
+                    let rs_data=JSON.parse(data)
+                    console.log(rs_data)
+                    const result=Object.keys(rs_data)
+                    console.log(result)
+                    if (result[0]=='ok'){
+                        let response_updata=document.getElementById("updata_message")
+                        response_updata.innerHTML="資料更新成功"
+                    }
+                    else{
+                        let response_updata=document.getElementById("updata_message")
+                        response_updata.innerHTML="更新失敗"
+                    }
+                    console.log(result)
+                })
+                .catch(error=>console.error(error))
+                
+            }
+        </script>
+        
+
+    </head>
+    <body>
+        <div class="text">歡迎光臨，會員專區</div>
+        <div class="signsystem">
+            {{ name }}您好，歡迎登入
+        </div>
+        <div class="signsystem">
+            <a href="/signin/signout">登出系統</a>
+        </div>
+        
+        <div class="member_search_item">
+            查詢會員姓名
+        </div>
+        <div  class="member_search_item">
+            <div  class="member_search_button"><input type="text" name="my_data" id="my_data" >   <input type="button" value="查詢" onclick="submit()"></div>
+        </div>
+        <div class="signsystem" id="name">
+            
+        </div>
+        <hr size="2px">
+        <div class="member_search_item">
+            更改會員姓名
+        </div>
+        <div  class="member_search_item">
+            <div  class="member_search_button"><input type="text" name="my_data" id="updata_my_data" >   <input type="button" value="更新" onclick="submit_updata()"></div>
+        </div>
+        <div class="signsystem" id="updata_message">
+
+        </div>
+    </body>
+
+
+
+
+</html>
